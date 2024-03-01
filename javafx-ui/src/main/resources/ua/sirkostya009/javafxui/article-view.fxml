@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ua.sirkostya009.javafxui.ArticleController">
+    <center>
+        <VBox alignment="CENTER" BorderPane.alignment="CENTER">
+            <TextFlow>
+                <Text fx:id="titleLabel" />
+            </TextFlow>
+            <HBox spacing="10">
+                <Text fx:id="authorLabel" />
+                <Text fx:id="postedAtLabel" />
+            </HBox>
+            <TextFlow>
+                <Text fx:id="descriptionLabel" />
+            </TextFlow>
+            <HBox alignment="CENTER_LEFT">
+                <Button mnemonicParsing="false" text="Edit" onAction="#edit" />
+                <padding>
+                   <Insets right="10.0" />
+                </padding>
+            </HBox>
+            <padding>
+                <Insets left="10.0" right="10.0" />
+            </padding>
+        </VBox>
+    </center>
+</BorderPane>
