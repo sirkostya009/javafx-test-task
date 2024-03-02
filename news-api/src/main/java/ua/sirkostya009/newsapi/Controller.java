@@ -14,12 +14,10 @@ public class Controller {
     @GetMapping("/api/news")
     public List<News> fetchNews(@RequestParam(required = false) Time time) {
         var query = "SELECT * FROM news";
-        if (time != null) {
-            switch (time) {
-                case MORNING -> query += " WHERE HOUR(posted_at) < 12";
-                case DAY -> query += " WHERE HOUR(posted_at) >= 12 AND HOUR(posted_at) < 18";
-                case EVENING -> query += " WHERE HOUR(posted_at) >= 18";
-            }
+        if (time != null) switch (time) {
+            case MORNING -> query += " WHERE HOUR(posted_at) < 12";
+            case DAY -> query += " WHERE HOUR(posted_at) >= 12 AND HOUR(posted_at) < 18";
+            case EVENING -> query += " WHERE HOUR(posted_at) >= 18";
         }
         return client.sql(query + " ORDER BY added_at DESC").query(News.class).list();
     }

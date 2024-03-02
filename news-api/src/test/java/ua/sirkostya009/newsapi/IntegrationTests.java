@@ -24,7 +24,7 @@ public class IntegrationTests {
     private Controller controller;
 
     @Test
-    public void contextLoads() throws Exception {
+    public void testFetchNews() throws Exception {
         when(controller.fetchNews(Time.MORNING)).thenReturn(List.of());
 
         mockMvc.perform(get("/api/news?time=MORNING"))

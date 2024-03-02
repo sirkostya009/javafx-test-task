@@ -1,8 +1,9 @@
-package ua.sirkostya009.javafxui;
+package ua.sirkostya009.javafxui.controller;
 
 import javafx.fxml.FXML;
 import javafx.scene.text.Text;
 import lombok.RequiredArgsConstructor;
+import ua.sirkostya009.javafxui.model.News;
 
 import java.util.function.Supplier;
 

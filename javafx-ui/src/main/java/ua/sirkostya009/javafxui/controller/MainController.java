@@ -1,4 +1,4 @@
-package ua.sirkostya009.javafxui;
+package ua.sirkostya009.javafxui.controller;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
@@ -9,6 +9,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Pagination;
+import ua.sirkostya009.javafxui.Main;
+import ua.sirkostya009.javafxui.model.News;
+import ua.sirkostya009.javafxui.model.Time;
 
 import java.io.IOException;
 import java.net.URI;

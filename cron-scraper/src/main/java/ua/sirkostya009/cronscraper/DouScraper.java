@@ -26,7 +26,7 @@ public class DouScraper {
     public void job() throws IOException {
         var document = douNews.get().body();
         var articles = document.getElementsByClass("b-postcard");
-        var duplicates = new AtomicInteger();
+        var counter = new AtomicInteger();
 
         articles.forEach(article -> {
             var titleAnchor = article.select("h2.title a");
@@ -41,30 +41,29 @@ public class DouScraper {
 
             var description = article.select("p.b-typo").text();
 
-            var news = new News(titleUrl, titleText, authorUrl, authorName, postedAt, description);
-
             try {
                 client.sql("""
                     INSERT INTO news (title_url, title, author_url, author, posted_at, description)
                     VALUES (:titleUrl, :title, :authorUrl, :author, :postedAt, :description)
-                    """).param("titleUrl", news.titleUrl())
-                        .param("title", news.title())
-                        .param("authorUrl", news.authorUrl())
-                        .param("author", news.author())
-                        .param("postedAt", news.postedAt())
-                        .param("description", news.description())
+                    """).param("titleUrl", titleUrl)
+                        .param("title", titleText)
+                        .param("authorUrl", authorUrl)
+                        .param("author", authorName)
+                        .param("postedAt", postedAt)
+                        .param("description", description)
                         .update();
             } catch (DuplicateKeyException ignored) { // by design
-                duplicates.incrementAndGet();
+                counter.incrementAndGet();
             } catch (Exception e) {
                 log.error("Error while inserting news", e);
+                counter.incrementAndGet();
             }
         });
 
-        if (duplicates.get() == articles.size()) {
+        if (counter.get() == articles.size()) {
             log.info("No new articles");
         } else {
-            log.info("Inserted {} new articles", articles.size() - duplicates.get());
+            log.info("Inserted {} new articles", articles.size() - counter.get());
         }
     }
 

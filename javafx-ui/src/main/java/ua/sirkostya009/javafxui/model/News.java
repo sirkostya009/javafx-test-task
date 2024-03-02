@@ -1,4 +1,4 @@
-package ua.sirkostya009.javafxui;
+package ua.sirkostya009.javafxui.model;
 
 public record News(
         String titleUrl,
