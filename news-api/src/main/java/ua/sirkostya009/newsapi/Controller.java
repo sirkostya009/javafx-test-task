@@ -15,9 +15,9 @@ public class Controller {
     public List<News> fetchNews(@RequestParam(required = false) Time time) {
         var query = "SELECT * FROM news";
         if (time != null) switch (time) {
-            case MORNING -> query += " WHERE HOUR(posted_at) < 12";
-            case DAY -> query += " WHERE HOUR(posted_at) >= 12 AND HOUR(posted_at) < 18";
-            case EVENING -> query += " WHERE HOUR(posted_at) >= 18";
+            case MORNING -> query += " WHERE HOUR(added_at) < 12";
+            case DAY -> query += " WHERE HOUR(added_at) >= 12 AND HOUR(added_at) < 18";
+            case EVENING -> query += " WHERE HOUR(added_at) >= 18";
         }
         return client.sql(query + " ORDER BY added_at DESC").query(News.class).list();
     }
